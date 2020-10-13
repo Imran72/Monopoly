@@ -14,13 +14,13 @@ public class Game {
     int width;
     int height;
     int step;
+    int cells;
     double playerMoney;
     double creditCoeff;
     double debtCoeff;
     double penaltyCoeff;
     boolean playerState;
     boolean botState;
-    int cells;
     Field field;
 
 

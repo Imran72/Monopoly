@@ -6,8 +6,8 @@ package monopoly.player;
 
 public class Player {
     double money;
-    int position;
     double expenses;
+    int position;
     int mod;
 
     public int getPosition() {
