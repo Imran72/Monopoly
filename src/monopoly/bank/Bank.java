@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Bank implements ICall {
-    Map<Player, Double> playerDictionary;
+    public static Map<Player, Double> playerDictionary;
     public static double debtCoeff;
     public static double creditCoeff;
 
@@ -49,21 +49,35 @@ public class Bank implements ICall {
             answer = in.next();
             while (!answer.equals("No") && (num = TryParse(answer)) == -1 && num > player.getExpenses() * creditCoeff) {
                 System.out.printf("Something went wrong! Input how many you want to get or ’No’! " +
-                        "The maximum amount of your credit can be %d", creditCoeff * player.getExpenses());
+                        "The maximum amount of your credit can be %d.", creditCoeff * player.getExpenses());
                 answer = in.next();
             }
-            TakeCredit(num, player);
+            if (answer.equals("No"))
+                return true;
+            else
+                TakeCredit(num, player);
         }
         return true;
+    }
+
+    @Override
+    public void CallInfo(String pos) {
+        String info = String.format("Dear player, you are currently in cell %s. Welcome to the %s.", pos, "BankOffice");
+        System.out.println(info);
+    }
+
+    @Override
+    public char Name(Player player) {
+        return '$';
     }
 
     public static double TryParse(String answer) {
         double num;
         try {
             num = Double.parseDouble(answer);
+            return num;
         } catch (Exception e) {
             return -1;
         }
-        return -1;
     }
 }

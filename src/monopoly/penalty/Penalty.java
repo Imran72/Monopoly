@@ -12,7 +12,7 @@ public class Penalty implements ICall {
 
     public boolean TakePenalty(Player player) {
         if (player.getMoney() >= penaltySum) {
-            player.setMoney(player.getMoney() + penaltySum);
+            player.addMoney(-penaltySum * player.getMoney());
             return true;
         }
         return false;
@@ -20,8 +20,19 @@ public class Penalty implements ICall {
 
     @Override
     public boolean Call(Player player) {
-        System.out.printf("You are in a penalty cell. You have been fined %d." +
-                " Attempt to charge a fine...", penaltySum);
+        String st = String.format("You are in a penalty cell. You have been fined %.2f. Attempt to charge a fine...", penaltySum * player.getMoney());
+        System.out.println(st);
         return TakePenalty(player);
+    }
+
+    @Override
+    public void CallInfo(String pos) {
+        String info = String.format("Dear player, you are currently in cell %s. Welcome to the %s.", pos, "PenaltyStation");
+        System.out.println(info);
+    }
+
+    @Override
+    public char Name(Player player) {
+        return '%';
     }
 }

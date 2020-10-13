@@ -7,8 +7,11 @@ import monopoly.bank.Bank;
 import monopoly.base.ICall;
 import monopoly.empty.Empty;
 import monopoly.penalty.Penalty;
+import monopoly.player.Player;
 import monopoly.shop.Shop;
 import monopoly.taxi.Taxi;
+
+import java.util.Arrays;
 
 public class Field {
     int width;
@@ -16,9 +19,22 @@ public class Field {
     double penalty;
     ICall[] monopolyMap;
 
-    public ICall getMap(int index)
-    {
+    public ICall getMap(int index) {
         return monopolyMap[index];
+    }
+
+    public String GetCoordinates(int index) {
+        int x = 0;
+        int y = 0;
+        if (index <= width + height - 2) {
+            x = Math.min(5, index);
+            y = Math.max(0, index - x);
+        } else if (index > width + height - 2) {
+            index %= (width + height - 2);
+            x = width - Math.min(index, width - 1) - 1;
+            y = height - (index - (width - x - 1)) - 1;
+        }
+        return String.format("(%d, %d)", x, y);
     }
 
 
@@ -29,8 +45,23 @@ public class Field {
         this.GenerateField();
     }
 
-    void GetConsoleField() {
-
+    public void GetConsoleField(Player player) {
+        String st = "";
+        String buffer = "";
+        for (int i = 0; i < (width - 2) * 2 + 1; i++)
+            buffer += " ";
+        ICall[] top = Arrays.copyOfRange(monopolyMap, 0, width);
+        ICall[] right = Arrays.copyOfRange(monopolyMap, width, width + height - 2);
+        ICall[] bottom = Arrays.copyOfRange(monopolyMap, width + height - 2, width * 2 + height - 2);
+        ICall[] left = Arrays.copyOfRange(monopolyMap, width * 2 + height - 2, width * 2 + height * 2 - 4);
+        for (int i = 0; i < top.length; i++)
+            st += top[i].Name(player) + " ";
+        st += "\n";
+        for (int i = 0; i < right.length; i++)
+            st += left[left.length - 1 - i].Name(player) + buffer + right[i].Name(player) + "\n";
+        for (int i = bottom.length - 1; i > -1; i--)
+            st += bottom[i].Name(player) + " ";
+        System.out.println(st);
     }
 
     public void GenerateField() {
@@ -80,8 +111,7 @@ public class Field {
         }
     }
 
-    ICall GetObject(char s)
-    {
+    ICall GetObject(char s) {
         if (s == '$')
             return new Bank();
         if (s == 'S')

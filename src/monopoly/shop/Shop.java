@@ -32,6 +32,22 @@ public class Shop implements ICall {
 
     @Override
     public boolean Call(Player player) {
-        return false;
+
+        return true;
+    }
+
+    @Override
+    public void CallInfo(String pos) {
+        String info = String.format("Dear player, you are currently in cell %s. Welcome to the %s.", pos, "Shop");
+        System.out.println(info);
+    }
+
+    @Override
+    public char Name(Player player) {
+        if (owner == null)
+            return 'S';
+        if (player == owner)
+            return 'M';
+        return 'O';
     }
 }
