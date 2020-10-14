@@ -4,55 +4,68 @@
 
 package monopoly.player;
 
+/**
+ * A class of an abstart player
+ * There are:
+ * - money
+ * - position
+ * - expenses
+ * it all can be changed
+ */
 public class Player {
-    double money;
-    double expenses;
-    int position;
-    int mod;
+    int money; // initial money of player
+    int expenses; // expenses player during a game
+    int position; // player's position
+    int mod; // number cells in map
 
+    /**
+     * returns position
+     */
     public int getPosition() {
         return position;
     }
 
-    public void setPosition(int value)
-    {
-        position = value;
-    }
-
-    public void addPosition(int value)
-    {
+    /**
+     * add incoming value to position
+     */
+    public void addPosition(int value) {
         position = (position + value) % mod;
     }
 
-    public void addMoney(double value)
-    {
-        money += value;
-    }
-
-    public double getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(double value) {
-        expenses = value;
-    }
-
-    public Player(double money, int mod) {
-        this.money = money;
-        this.mod = mod;
-        position = 0;
-    }
-
-    public double getMoney() {
+    /**
+     * returns amount of money
+     */
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(double value) {
-        money = value;
+    /**
+     * add value to money
+     */
+    public void addMoney(int value) {
+        money += value;
     }
 
-    public Player(int money, int position) {
+    /**
+     * returns player's expenses
+     */
+    public int getExpenses() {
+        return expenses;
+    }
+
+    /**
+     * add value to expenses
+     */
+    public void addExpenses(int value) {
+        expenses += value;
+    }
+
+    /**
+     * Constructor
+     */
+    public Player(int money, int mod) {
         this.money = money;
-        this.position = position;
+        this.mod = mod;
+        this.position = 0;
     }
 }

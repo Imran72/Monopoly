@@ -3,13 +3,21 @@
  */
 
 import monopoly.game.Game;
-
+/**
+ * Class with main
+ * It is a start of a Game
+ */
 public class Monopoly {
+    /**
+     * It is a MAIN
+     * here it must get values from player
+     */
     public static void main(String[] args) {
         try {
-            int width = 6;//Integer.parseInt(args[0]);
-            int height = 6;//Integer.parseInt(args[1]);
-            int money = 1500;//Integer.parseInt(args[2]);
+            int width = 6;//Integer.parseInt(args[0]); // width of a field
+            int height = 6;//Integer.parseInt(args[1]); // height of a field
+            int money = 1500;//Integer.parseInt(args[2]); // amount of money
+            // if data is not match it throws Exception
             if (!CheckNumbers(width, height, money))
                 throw new IllegalArgumentException();
             new Game(width, height, money);
@@ -22,6 +30,9 @@ public class Monopoly {
         }
     }
 
+    /**
+     * This method is meant to check Data is correct or not
+     */
     public static boolean CheckNumbers(int width, int height, int money) {
         if (width < 6 | width > 30)
             return false;

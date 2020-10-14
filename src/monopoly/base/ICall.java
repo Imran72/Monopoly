@@ -1,10 +1,23 @@
 package monopoly.base;
 
-import monopoly.field.Field;
 import monopoly.player.Player;
 
+/**
+ * base interface for all object in monopoly map
+ */
 public interface ICall {
-    boolean Call(Player player);
-    void CallInfo(String pos);
+    /**
+     * to do some special function of an object
+     */
+    boolean Call(Player player, String step);
+
+    /**
+     * prints info about object
+     */
+    void CallInfo(String pos, String name);
+
+    /**
+     * returns special sign of an object
+     */
     char Name(Player player);
 }
