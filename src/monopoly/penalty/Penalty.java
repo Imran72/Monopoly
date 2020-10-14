@@ -32,7 +32,7 @@ public class Penalty implements ICall {
     @Override
     public boolean Call(Player player, String step) {
         step = step == "player" ? "You are" : "Bot is";
-        String st = String.format("%s in a penalty cell. Have been fined %d$. Attempt" +
+        String st = String.format("%s in a penalty cell. Has been fined %d$. Attempt" +
                 " to charge a fine...", step, (int) Math.round(penaltyCoeff * player.getMoney()));
         System.out.println(st);
         return TakePenalty(player);

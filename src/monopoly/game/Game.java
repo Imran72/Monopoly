@@ -94,7 +94,7 @@ public class Game {
      * and run interaction between player and cell
      */
     public boolean PlayerMove(Player player, int step) {
-        int move = (int) (Math.random() * 6 + 1); // generates random number
+        int move = (int) (Math.random() * 6 + 1) + (int) (Math.random() * 6 + 1); // generates a sum of two random numbers
         boolean state; // state of method. is FALSE if something goes wrong, otherwise TRUE
         player.addPosition(move); // add number to position
         // In case of TAXI turn can repeat
