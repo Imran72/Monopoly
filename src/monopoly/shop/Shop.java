@@ -36,10 +36,11 @@ public class Shop implements ICall {
      * Method takes a player and upgrades shop using player's money
      */
     void UpgradeShop(Player player) {
-        player.addMoney(-N);
-        player.addExpenses(N);
-        N += Math.round(improvementCoeff * N);
-        K += Math.round(compensationCoeff * K);
+        int changesN = (int) Math.round(improvementCoeff * N);
+        player.addMoney(-changesN);
+        player.addExpenses(changesN);
+        N += changesN;
+        K += (int) Math.round(compensationCoeff * K);
     }
 
     /**
@@ -56,12 +57,13 @@ public class Shop implements ICall {
      */
     public boolean BotShop(Player player) {
         int num = rnd.nextInt(2);
+        int changesN = (int) Math.round(improvementCoeff * N);
         if (owner == null && this.N <= player.getMoney()) {
             if (num == 1) {
                 BecomeOwner(player);
                 System.out.println("Bot became a shop's owner!");
             } else System.out.println("Bot did nothing.");
-        } else if (player.equals(owner) && this.N <= player.getMoney()) {
+        } else if (player.equals(owner) && changesN <= player.getMoney()) {
             if (num == 1) {
                 UpgradeShop(player);
                 System.out.println("Bot upgraded its shop!");
@@ -92,6 +94,7 @@ public class Shop implements ICall {
         if (step.equals("bot"))
             return BotShop(player);
         String offer; // offer to player
+        int changesN = (int) Math.round(improvementCoeff * N);
         if (owner == null && this.N <= player.getMoney()) {
             offer = String.format("This shop has no owner. Would you like to buy it for %d$?" +
                     " Input ‘Yes’ if you agree or ‘No’ otherwise.", N);
@@ -105,7 +108,7 @@ public class Shop implements ICall {
             if (ans.equals("Yes"))
                 this.BecomeOwner(player);
 
-        } else if (player.equals(owner) && this.N <= player.getMoney()) {
+        } else if (player.equals(owner) && changesN <= player.getMoney()) {
             offer = String.format("Would you like to upgrade it for %d$?" +
                     " Input ‘Yes’ if you agree or ‘No’ otherwise».", N);
             System.out.println(offer);
