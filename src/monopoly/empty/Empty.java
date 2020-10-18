@@ -5,10 +5,7 @@ import monopoly.player.Player;
 
 public class Empty implements ICall {
 
-    /**
-     * implementaion of interface.
-     * Notes about nothing except phrase "Just relax there."
-     */
+
     @Override
     public boolean Call(Player player, String step) {
         System.out.println("Just relax there.");

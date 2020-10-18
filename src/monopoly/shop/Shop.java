@@ -26,7 +26,7 @@ public class Shop implements ICall {
      * Constructor
      */
     public Shop() {
-        N = (int) Math.round(rnd.nextDouble() * (500 - 50) + 50);
+        N = rnd.nextInt(450) + 50;
         K = (int) Math.round(rnd.nextDouble() * (0.9 * N - 0.5 * N) + 0.5 * N);
         compensationCoeff = rnd.nextDouble() * (1 - 0.1) + 0.1;
         improvementCoeff = rnd.nextDouble() * (2 - 0.1) + 0.1;
@@ -56,24 +56,27 @@ public class Shop implements ICall {
      */
     public boolean BotShop(Player player) {
         int num = rnd.nextInt(2);
-        if (owner == null) {
+        if (owner == null && this.N <= player.getMoney()) {
             if (num == 1) {
                 BecomeOwner(player);
                 System.out.println("Bot became a shop's owner!");
-            }
-        } else if (player.equals(owner)) {
+            } else System.out.println("Bot did nothing.");
+        } else if (player.equals(owner) && this.N <= player.getMoney()) {
             if (num == 1) {
                 UpgradeShop(player);
                 System.out.println("Bot upgraded its shop!");
-            }
-        } else {
+            } else System.out.println("Bot did nothing.");
+        } else if (this.owner != null && !player.equals(owner)) {
             if (player.getMoney() > this.K) {
                 player.addMoney(-K);
                 this.owner.addMoney(K);
                 System.out.println("Bot paid compensation!");
-            } else
+            } else {
+                System.out.println("Not enough money to pay the shop owner compensation, so ...");
                 return false;
-        }
+            }
+        } else
+            System.out.println("Not enough money to buy or upgrade this shop!");
         return true;
     }
 
@@ -89,7 +92,7 @@ public class Shop implements ICall {
         if (step.equals("bot"))
             return BotShop(player);
         String offer; // offer to player
-        if (owner == null) {
+        if (owner == null && this.N <= player.getMoney()) {
             offer = String.format("This shop has no owner. Would you like to buy it for %d$?" +
                     " Input ‘Yes’ if you agree or ‘No’ otherwise.", N);
             System.out.println(offer);
@@ -102,7 +105,7 @@ public class Shop implements ICall {
             if (ans.equals("Yes"))
                 this.BecomeOwner(player);
 
-        } else if (player.equals(owner)) {
+        } else if (player.equals(owner) && this.N <= player.getMoney()) {
             offer = String.format("Would you like to upgrade it for %d$?" +
                     " Input ‘Yes’ if you agree or ‘No’ otherwise».", N);
             System.out.println(offer);
@@ -114,15 +117,18 @@ public class Shop implements ICall {
             }
             if (ans.equals("Yes"))
                 this.UpgradeShop(player);
-        } else {
+        } else if (this.owner != null && !player.equals(owner)) {
             offer = "You have entered your opponent's shop. You have to pay him compensation.";
             System.out.println(offer);
             if (player.getMoney() > this.K) {
                 player.addMoney(-K);
                 this.owner.addMoney(K);
-            } else
+            } else {
+                System.out.println("Not enough money to pay the shop owner compensation, so ...");
                 return false;
-        }
+            }
+        } else
+            System.out.println("Not enough money to buy or upgrade this shop!");
         return true;
     }
 

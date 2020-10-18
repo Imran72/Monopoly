@@ -80,7 +80,7 @@ public class Game {
             step = (step + 1) % 2; //  change turn
         }
         // depending on bot/player state, it will be chosen a winner
-        if (!botState)
+        if (playerState)
             System.out.println("You won! The game is over.");
         else
             System.out.println("You have lost and the bot has won! The game is over.");

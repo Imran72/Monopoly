@@ -71,7 +71,7 @@ public class Bank implements ICall {
             int num = 0;
             Scanner in = new Scanner(System.in);
             System.out.println("You are in the bank office. Would you like to get a credit?" +
-                    "Input how many you want to get or ’No’!");
+                    " Input how many you want to get or ’No’!");
             answer = in.next();
             while (!answer.equals("No") && ((num = TryParse(answer)) < 1
                     || num > (int) Math.round(player.getExpenses() * creditCoeff))) {

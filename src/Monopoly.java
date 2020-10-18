@@ -3,6 +3,7 @@
  */
 
 import monopoly.game.Game;
+
 /**
  * Class with main
  * It is a start of a Game
@@ -16,7 +17,7 @@ public class Monopoly {
         try {
             int width = 6;//Integer.parseInt(args[0]); // width of a field
             int height = 6;//Integer.parseInt(args[1]); // height of a field
-            int money = 1500;//Integer.parseInt(args[2]); // amount of money
+            int money = 500;//Integer.parseInt(args[2]); // amount of money
             // if data is not match it throws Exception
             if (!CheckNumbers(width, height, money))
                 throw new IllegalArgumentException();
@@ -27,6 +28,8 @@ public class Monopoly {
             System.out.println("Values are not in the correct range!");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("You did not pass the required values!");
+        } catch (Exception e) {
+            System.out.println("Something went wrong!");
         }
     }
 
