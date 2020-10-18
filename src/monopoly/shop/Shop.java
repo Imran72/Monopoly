@@ -110,7 +110,7 @@ public class Shop implements ICall {
 
         } else if (player.equals(owner) && changesN <= player.getMoney()) {
             offer = String.format("Would you like to upgrade it for %d$?" +
-                    " Input ‘Yes’ if you agree or ‘No’ otherwise».", N);
+                    " Input ‘Yes’ if you agree or ‘No’ otherwise».", changesN);
             System.out.println(offer);
             Scanner in = new Scanner(System.in);
             String ans = in.next();

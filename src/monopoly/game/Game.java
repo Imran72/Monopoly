@@ -23,8 +23,8 @@ public class Game {
     double creditCoeff;
     double debtCoeff;
     double penaltyCoeff;
-    boolean playerState; // True = player is alive, has money > 0
-    boolean botState; // True = bot is alive, has money > 0
+    boolean playerState = true; // True = player is alive, has money > 0
+    boolean botState = true; // True = bot is alive, has money > 0
     Field field; // object of field
 
 
@@ -81,9 +81,9 @@ public class Game {
         }
         // depending on bot/player state, it will be chosen a winner
         if (playerState)
-            System.out.println("You won! The game is over.");
+            System.out.println("Player won! The game is over.");
         else
-            System.out.println("You have lost and the bot has won! The game is over.");
+            System.out.println("Player has lost and the bot has won! The game is over.");
     }
 
     /**

@@ -46,7 +46,7 @@ public class Bank implements ICall {
      * Method is meant to give a player a credit and then add him to 'list of deptors'
      */
     boolean TakeCredit(int sum, Player player) {
-        playerDictionary.put(player, (int) Math.round(sum * creditCoeff));
+        playerDictionary.put(player, (int) Math.round(sum * debtCoeff));
         player.addMoney(sum);
         return true;
     }
@@ -73,12 +73,12 @@ public class Bank implements ICall {
             System.out.println("You are in the bank office. Would you like to get a credit?" +
                     " Input how many you want to get or ’No’!");
             answer = in.next();
-            while (!answer.equals("No") && ((num = TryParse(answer)) < 1
+            while (!answer.equals("No") && ((num = TryParse(answer)) < 0
                     || num > (int) Math.round(player.getExpenses() * creditCoeff))) {
                 answer = String.format("Something went wrong! Input how many you want to get or ’No’! " +
                                 "The maximum amount of your credit can be %d.\n" +
                                 "Input how many you want to get or ’No’!",
-                        (int) Math.round(creditCoeff * player.getExpenses()));
+                        Math.round(creditCoeff * player.getExpenses()));
                 System.out.println(answer);
                 answer = in.next();
             }
