@@ -96,14 +96,17 @@ public class Shop implements ICall {
         String offer; // offer to player
         int changesN = (int) Math.round(improvementCoeff * N);
         if (owner == null && this.N <= player.getMoney()) {
-            offer = String.format("This shop has no owner. Would you like to buy it for %d$?" +
-                    " Input ‘Yes’ if you agree or ‘No’ otherwise.", N);
+            offer = String.format("This shop has no owner.\nCompensation = %d$.\n" +
+                    "Compensation coefficient = %.2f.\n" +
+                    "Improvement coefficien = %.2f.\n" +
+                    "Would you like to buy it for %d$?" +
+                    " Input ‘Yes’ if you agree or ‘No’ otherwise.", K, compensationCoeff, improvementCoeff, N);
             System.out.println(offer);
             Scanner in = new Scanner(System.in);
-            String ans = in.next();
+            String ans = in.nextLine();
             while (!ans.equals("Yes") && !ans.equals("No")) {
                 System.out.println("Input ‘Yes’ if you agree or ‘No’ otherwise.");
-                ans = in.next();
+                ans = in.nextLine();
             }
             if (ans.equals("Yes"))
                 this.BecomeOwner(player);
@@ -113,10 +116,10 @@ public class Shop implements ICall {
                     " Input ‘Yes’ if you agree or ‘No’ otherwise».", changesN);
             System.out.println(offer);
             Scanner in = new Scanner(System.in);
-            String ans = in.next();
+            String ans = in.nextLine();
             while (!ans.equals("Yes") && !ans.equals("No")) {
                 System.out.println("Input ‘Yes’ if you agree or ‘No’ otherwise.");
-                ans = in.next();
+                ans = in.nextLine();
             }
             if (ans.equals("Yes"))
                 this.UpgradeShop(player);

@@ -39,7 +39,7 @@ public class Field {
         int x = 0;
         int y = 0;
         if (index <= width + height - 2) {
-            x = Math.min(5, index);
+            x = Math.min(width - 1, index);
             y = Math.max(0, index - x);
         } else if (index > width + height - 2) {
             index %= (width + height - 2);

@@ -72,7 +72,7 @@ public class Bank implements ICall {
             Scanner in = new Scanner(System.in);
             System.out.println("You are in the bank office. Would you like to get a credit?" +
                     " Input how many you want to get or ’No’!");
-            answer = in.next();
+            answer = in.nextLine();
             while (!answer.equals("No") && ((num = TryParse(answer)) < 0
                     || num > (int) Math.round(player.getExpenses() * creditCoeff))) {
                 answer = String.format("Something went wrong! Input how many you want to get or ’No’! " +
@@ -80,7 +80,7 @@ public class Bank implements ICall {
                                 "Input how many you want to get or ’No’!",
                         Math.round(creditCoeff * player.getExpenses()));
                 System.out.println(answer);
-                answer = in.next();
+                answer = in.nextLine();
             }
             if (answer.equals("No"))
                 return true;

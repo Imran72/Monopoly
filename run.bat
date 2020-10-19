@@ -1,0 +1,1 @@
+java -jar "Monopoly.jar" 6 6 1500

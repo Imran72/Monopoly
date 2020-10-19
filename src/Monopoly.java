@@ -15,9 +15,9 @@ public class Monopoly {
      */
     public static void main(String[] args) {
         try {
-            int width = 6;//Integer.parseInt(args[0]); // width of a field
-            int height = 6;//Integer.parseInt(args[1]); // height of a field
-            int money = 500;//Integer.parseInt(args[2]); // amount of money
+            int width = Integer.parseInt(args[0]); // width of a field
+            int height = Integer.parseInt(args[1]); // height of a field
+            int money = Integer.parseInt(args[2]); // amount of money
             // if data is not match it throws Exception
             if (!CheckNumbers(width, height, money))
                 throw new IllegalArgumentException();
